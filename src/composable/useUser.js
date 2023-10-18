@@ -4,7 +4,6 @@ import { getStorage, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { ref, computed } from 'vue'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 
-
 const user = ref()
 const userList = ref([])
 
@@ -13,20 +12,21 @@ const loading = ref({
   userList: false
 })
 
+const userRemake = computed(() => {
+  if (user.value) {
+    return {
+      displayName: user.value.displayName,
+      email: user.value.email,
+      photoURL: user.value.photoURL,
+      uid: user.value.uid,
+      status: 'user'
+    }
+  }
+  return null
+})
+
 export const useUser = () => {
   const auth = getAuth()
-
-  const userRemake = computed(() => {
-    if (user.value) {
-      return {
-        displayName: user.value.displayName,
-        email: user.value.email,
-        photoURL: user.value.photoURL,
-        uid: user.value.uid
-      }
-    }
-    return null
-  })
 
   function googleRegister() {
     const provider = new GoogleAuthProvider()

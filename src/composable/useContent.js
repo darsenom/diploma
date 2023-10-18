@@ -1,15 +1,38 @@
-import { collection, getDocs, addDoc, deleteDoc, doc } from 'firebase/firestore'
+import { getDocs, addDoc, doc, collection, deleteDoc } from 'firebase/firestore'
 import { db, storage } from '@/firebase'
 import { getStorage, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { ref, computed } from 'vue'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
+import { createId } from '@/services/methods'
 
 import { useUser } from './useUser'
 
 export const useContent = () => {
   const content = ref()
   const contentList = ref([])
-  const newContent = ref({})
+  const newContent = ref({
+    id: createId(),
+    title: '',
+    maxCount: '',
+    currentCount: '',
+    city: '',
+    startDate: '',
+    endDate: '',
+    members: [
+      {
+      
+      },
+      {
+
+      },
+    ],
+    meta: {
+      couches: '',
+      clubs: '',
+      country: '',
+    },
+    author: '',
+  })
 
   const loading = ref({
     content: false,
@@ -42,11 +65,11 @@ export const useContent = () => {
   }
 
   async function addContent() {
-    const {user} =useUser() 
+    const { userRemake } = useUser()
     loading.value.newContent = true
     try {
-      if (newContent.value && user.value) {
-        newContent.value.author = user.value
+      if (newContent.value && userRemake.value) {
+        newContent.value.author = userRemake.value
         await addDoc(collection(db, 'contents'), newContent.value)
         loading.value.newContent = false
       }
@@ -58,7 +81,7 @@ export const useContent = () => {
   async function deleteContent(id) {
     try {
       if (content.value) {
-        await deleteDoc(doc(db, 'content', id))
+        await deleteDoc(doc(db, 'contents', id))
       }
     } catch (error) {
       console.error(error)
@@ -68,10 +91,53 @@ export const useContent = () => {
   return {
     content,
     contentList,
+    loading,
+    newContent,
     getAllContent,
     getContentById,
     addContent,
-    deleteContent,
-    loading
+    deleteContent
   }
 }
+
+// Content
+// Users
+// Managers
+
+
+
+// newContent это ниже
+
+// firebase - Content
+// Collection
+// {
+// id
+//   title
+//   maxCount
+//   currentCount
+//   city
+//   startDate
+//   endDate
+//   members: [
+    // {
+      
+    // },
+    // {
+
+    // },
+// ]
+//   meta {
+//     couches
+//     clubs
+//     country
+//   }
+//  author
+// }
+
+
+
+// чтобы рядом toolbar - slot start slot end
+
+
+// у тебя 2 разные регистрации 
+// 
