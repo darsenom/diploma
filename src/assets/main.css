@@ -43,3 +43,11 @@ h1 {
 .p-datatable-wrapper {
   border-radius: 25px;
 }
+
+.p-dialog-header {
+  background: #ffc3e7;
+}
+
+.p-dialog-content {
+  background: #ffc3e7;
+}
