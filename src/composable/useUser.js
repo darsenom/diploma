@@ -1,6 +1,5 @@
 import { collection, getDocs, addDoc } from 'firebase/firestore'
-import { db, storage } from '@/firebase'
-import { getStorage, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { db } from '@/firebase'
 import { ref, computed } from 'vue'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 
@@ -13,13 +12,14 @@ const loading = ref({
 })
 
 const userRemake = computed(() => {
+ 
   if (user.value) {
     return {
       displayName: user.value.displayName,
       email: user.value.email,
       photoURL: user.value.photoURL,
       uid: user.value.uid,
-      status: 'user'
+      // status: 'user'
     }
   }
   return null
@@ -30,7 +30,7 @@ export const useUser = () => {
 
   function googleRegister() {
     const provider = new GoogleAuthProvider()
-
+    
     signInWithPopup(auth, provider)
       .then(async (userCredential) => {
         user.value = userCredential.user

@@ -1,35 +1,45 @@
 @import './base.css';
 
 #app {
-  max-width: 1280px;
+  max-width: 2560px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2rem 0 0;
 
   font-weight: normal;
+  background-color: #ffc3e7;
 }
 
 a,
 .green {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
+}
+*{
+  color: black;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+h1 {
+  color: #8a9df9;
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
+.p-galleria-thumbnail-container {
+  background: #ffc3e7;
+}
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+.p-galleria-thumbnail-item{
+  opacity: 1;
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+  border: 0;
+  background: white;
+
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+  border: 0;
+  background: white;
+}
+
+.p-datatable-wrapper {
+  border-radius: 25px;
 }
